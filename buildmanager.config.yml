@@ -8,7 +8,9 @@ prebuild-commands:
 # Custom commands. These are run after subtrees are updated and after the drush make
 # rebuild runs, before any changes from drush make are committed.
 postbuild-commands:
-  - 'rm -rf docroot/sites/default; cd docroot/sites; ln -s ../../default'
+  - 'rm -rf docroot/sites; cd docroot; ln -s ../sites sites'
+  - 'rm -rf docroot/.htaccess; cd docroot; ln-s ../.htaccess .htaccess'
+  - 'rm -rf docroot/robots.txt; cd docroot; ln-s ../robots.txt robots.txt'
   - 'rm docroot/profiles/dkan/.gitignore'
   - 'rm docroot/profiles/dkan/libraries/Leaflet/.gitignore'
   # If your site includes libraries installed by composer (e.g. composer_autoload

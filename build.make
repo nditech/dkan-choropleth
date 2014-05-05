@@ -7,3 +7,9 @@ includes[dkan] = projects/dkan/build-dkan.make
 
 ; Include desired modules, themes, or libraries here.
 projects[devel][version] = 1.x
+
+projects[choropleth][type] = module
+projects[choropleth][subdir] = whitehouse
+projects[choropleth][download][type] = git
+projects[choropleth][download][url] = "git@github.com:nuams/choropleth.git"
+projects[choropleth][download][branch] = 7.x-1.x 
