@@ -21,6 +21,6 @@ subtrees:
   dkan:
     path: dkan
     uri: 'git@github.com:nuams/dkan.git'
-    branch:  7.x-1.x
+    branch: 7.x-1.x
     message: 'dkan subtree from git@github.com:nuams/dkan.git'
 
