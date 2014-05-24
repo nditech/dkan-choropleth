@@ -28,3 +28,8 @@ subtrees:
     uri: 'git@github.com:nuams/geo_file_entity.git'
     branch: master
     message: 'geo_file_entity subtree from git@github.com:nuams/geo_file_entity.git'
+  visualization_entity:
+    path: visualization_entity
+    uri: 'git@github.com:nuams/visualization_entity.git'
+    branch: entity_display
+    message: 'visualization_entity subtree from git@github.com:nuams/visualization_entity.git'
