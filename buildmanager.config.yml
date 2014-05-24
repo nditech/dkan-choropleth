@@ -23,4 +23,8 @@ subtrees:
     uri: 'git@github.com:nuams/dkan.git'
     branch: 7.x-1.x
     message: 'dkan subtree from git@github.com:nuams/dkan.git'
-
+  geo_file_entity:
+    path: geo_file_entity
+    uri: 'git@github.com:nuams/geo_file_entity.git'
+    branch: master
+    message: 'geo_file_entity subtree from git@github.com:nuams/geo_file_entity.git'
