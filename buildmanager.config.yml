@@ -21,6 +21,15 @@ subtrees:
   dkan:
     path: dkan
     uri: 'git@github.com:nuams/dkan.git'
-    branch:  7.x-1.x
+    branch: 7.x-1.x
     message: 'dkan subtree from git@github.com:nuams/dkan.git'
-
+  geo_file_entity:
+    path: geo_file_entity
+    uri: 'git@github.com:nuams/geo_file_entity.git'
+    branch: master
+    message: 'geo_file_entity subtree from git@github.com:nuams/geo_file_entity.git'
+  visualization_entity:
+    path: visualization_entity
+    uri: 'git@github.com:nuams/visualization_entity.git'
+    branch: entity_display
+    message: 'visualization_entity subtree from git@github.com:nuams/visualization_entity.git'
