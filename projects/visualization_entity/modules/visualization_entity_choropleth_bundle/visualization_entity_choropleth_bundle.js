@@ -51,6 +51,7 @@
           breakpoints: breakpoints,
           base_color: color_scale,
           bounds: bounds,
+          avg: resources[0].avg,
         });
       }
       else {
@@ -76,7 +77,6 @@
           label_to_map: label_column,
           base_color: color_scale,
           bounds: bounds,
-
         });
       }
       // Attach html and render the Recline view.

@@ -7,12 +7,56 @@
 include_once 'visualization_entity_choropleth_bundle.features.inc';
 
 /**
+ * Implements hook_menu().
+ */
+function visualization_entity_choropleth_bundle_menu() {
+  return array(
+    'visualization/choropleth_visualization/%/iframe' => array(
+      'title' => 'Choropleth Vizualization',
+      'page callback' => 'visualization_entity_choropleth_bundle_iframe',
+      'page arguments' => array(2),
+      'access arguments' => array('eck view visualization choropleth_visualization entities'),
+    )
+  );
+}
+
+function visualization_entity_choropleth_bundle_iframe($entity_id) {
+  $entity = entity_load_single(
+    'visualization',
+    $entity_id
+  );
+
+  if (!empty($entity)) {
+    $entity_view = entity_view('visualization', array($entity), 'full');
+    $visualization = drupal_render($entity_view);
+    return $visualization;
+  }
+  else {
+    return MENU_NOT_FOUND;
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function visualization_entity_choropleth_bundle_preprocess_page(&$vars) {
+  if (in_array('page__visualization__choropleth_visualization__iframe', $vars['theme_hook_suggestions'])) {
+    $vars['theme_hook_suggestions'][] = 'visualization-choropleth-iframe';
+  }
+}
+
+/**
  * Implements hook_field_widget_form_alter().
  */
 function visualization_entity_choropleth_bundle_field_widget_form_alter(&$element, &$form_state, $context) {
   $field = $context['field'];
   if (isset($field['bundles']) && isset($field['bundles']['visualization'])) {
     switch ($field['field_name']) {
+      case 'field_average_multiple_rows':
+        $element['#title'] = t('Average multiple rows?');
+        $element['#description'] = t('What to do when a given set of filters returns multiple rows as numerical sources for the coloring of a given polygon. If this is checked, it will average rows. If not, it will sum every row.');
+        break;
+
       case 'field_data_column':
         $element['value']['#description'] = t('If there are multiple possible columns to map the data by, specify the name of the column in the uploaded data which should determine colors of states on a state-by-state map. (When there are multiple possible columns and no one column is specified, users will be prompted to select from radio buttons.)');
         break;
@@ -77,7 +121,7 @@ function visualization_entity_choropleth_bundle_libraries_info() {
   $libraries['recline_choropleth'] = array(
     'name' => 'Recline Choropleth View',
     'vendor url' => 'https://github.com/nuams/choropleth',
-    'download url' => 'https://github.com/nuams/choropleth/zipball/7.x-1.x',
+    'download url' => 'https://github.com/nuams/choropleth/zipball/integration_branch',
     'path' => '',
     'version arguments' => array(
       'file' => 'choropleth.info',
@@ -95,7 +139,7 @@ function visualization_entity_choropleth_bundle_libraries_info() {
   $libraries['recline_choropleth_dataset'] = array(
     'name' => 'Recline Choropleth Dataset View',
     'vendor url' => 'https://github.com/nuams/choropleth_dataset',
-    'download url' => 'https://github.com/nuams/choropleth_dataset/zipball/7.x-1.x',
+    'download url' => 'https://github.com/nuams/choropleth_dataset/zipball/fix_accessing_state_variable_globally',
     'path' => '',
     'version arguments' => array(
       'file' => 'choropleth_dataset.info',
@@ -130,6 +174,13 @@ function visualization_entity_choropleth_bundle_theme($existing, $type, $theme, 
     'visualization__choropleth_visualization' => array(
       'render element' => 'elements',
       'template' => 'visualization--choropleth',
+      'path' => $tpls_path,
+    ),
+    'visualization-choropleth-iframe' => array(
+      'variables' => array(
+        'content' => t('HTML for Visualization.'),
+      ),
+      'template' => 'visualization-choropleth-iframe',
       'path' => $tpls_path,
     ),
   );
@@ -171,7 +222,7 @@ function visualization_entity_choropleth_bundle_entity_view_alter(&$build, $type
         if (isset($build['field_data_column'])) {
           $settings['data_column'] = $build['field_data_column']['#items'][0]['value'];
         }
-
+        
         // Build resources files.
         $nids = array();
         $resources = $build['field_resource']['#items'];
@@ -184,6 +235,7 @@ function visualization_entity_choropleth_bundle_entity_view_alter(&$build, $type
           $title = $resource->title;
           $delimiter = $resource->field_upload[LANGUAGE_NONE][0]['delimiter'];
           $delimiter = $delimiter !== NULL ? $delimiter : ',';
+          $average = $build['field_average_multiple_rows']['#items'][0]['value'] === 1 ? TRUE : FALSE;
           $resource = $resource->field_upload[LANGUAGE_NONE][0]['uri'];
           $resource = drupal_realpath($resource);
           $resource = file_get_contents($resource);
@@ -194,6 +246,7 @@ function visualization_entity_choropleth_bundle_entity_view_alter(&$build, $type
               'delimiter' => $delimiter,
               'dataset' => $resource,
               'map' => FALSE,
+              'avg' => $average,
             )
           );
         }
