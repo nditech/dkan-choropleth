@@ -16,7 +16,7 @@ libraries[numeral][download][type] = "file"
 libraries[numeral][download][url] = "https://github.com/adamwdraper/Numeral-js/zipball/master"
 
 libraries[recline_choropleth][download][type] = "file"
-libraries[recline_choropleth][download][url] = "https://github.com/nuams/choropleth/zipball/7.x-1.x"
+libraries[recline_choropleth][download][url] = "https://github.com/nuams/choropleth/zipball/integration_branch"
 
 libraries[recline_choropleth_dataset][download][type] = "file"
 libraries[recline_choropleth_dataset][download][url] = "https://github.com/nuams/choropleth_dataset/zipball/fix_accessing_state_variable_globally"

@@ -10,6 +10,49 @@
 function visualization_entity_choropleth_bundle_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'visualization-choropleth_visualization-field_average_multiple_rows'
+  $field_instances['visualization-choropleth_visualization-field_average_multiple_rows'] = array(
+    'bundle' => 'choropleth_visualization',
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'visualization',
+    'field_name' => 'field_average_multiple_rows',
+    'label' => 'average multiple rows',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 3,
+    ),
+  );
+
   // Exported field_instance: 'visualization-choropleth_visualization-field_color_scale'
   $field_instances['visualization-choropleth_visualization-field_color_scale'] = array(
     'bundle' => 'choropleth_visualization',
@@ -50,7 +93,7 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 2,
     ),
   );
 
@@ -90,7 +133,7 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 5,
     ),
   );
 
@@ -130,7 +173,7 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 4,
     ),
   );
 
@@ -172,7 +215,7 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
         'apply_chosen' => 0,
       ),
       'type' => 'options_select',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -220,6 +263,7 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('average multiple rows');
   t('color scale');
   t('data breakpoints');
   t('data column');
